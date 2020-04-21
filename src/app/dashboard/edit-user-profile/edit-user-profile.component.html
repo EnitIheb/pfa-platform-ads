@@ -1,0 +1,161 @@
+<!-- Edit Personal Info -->
+<div class="widget personal-info">
+    <h3 class="widget-header user">Edit Personal Information</h3>
+    <form (ngSubmit)="!fullNameForm.form.invalid && updateFullName(form.firstName,form.lastName)" #fullNameForm="ngForm">
+        <!-- First Name -->
+
+        <div class="form-group" [class.has-error]="(fullNameForm.submitted || firstName.touched) && firstName.invalid">
+            <label for="firstName">First Name</label>
+            <input type="text" class="form-control" name="firstName" #firstName="ngModel" [(ngModel)]="form.firstName" required minlength="3">
+        </div>
+
+        <div *ngIf="(fullNameForm.submitted || firstName.touched) && firstName.invalid">
+            <div *ngIf="firstName.errors?.required">First Name is required</div>
+            <div *ngIf="firstName.errors?.minlength">First Name must be at least 3 characters</div>
+        </div>
+
+        <!-- Last Name -->
+
+        <div class="form-group" [class.has-error]="(fullNameForm.submitted || lastName.touched) && lastName.invalid">
+            <label for="lastName">Last Name</label>
+            <input type="text" class="form-control" name="lastName" #lastName="ngModel" [(ngModel)]="form.lastName" required minlength="3">
+        </div>
+
+        <div *ngIf="(fullNameForm.submitted || lastName.touched) && lastName.invalid">
+            <div *ngIf="lastName.errors?.required">Last Name is required</div>
+            <div *ngIf="lastName.errors?.minlength">Last Name must be at least 3 characters</div>
+        </div>
+
+        <!-- File chooser -->
+
+        <!-- <div class="form-group choose-file">
+            <i class="fa fa-user text-center"></i>
+            <input type="file" class="form-control-file d-inline" id="input-file">
+        </div> -->
+
+        <!-- Comunity Name -->
+
+        <!-- <div class="form-group">
+            <label for="comunity-name">Comunity Name</label>
+            <input type="text" class="form-control" id="comunity-name">
+        </div> -->
+
+        <!-- Checkbox -->
+
+        <!-- <div class="form-check">
+            <label class="form-check-label" for="hide-profile">
+            <input class="form-check-input" type="checkbox" value="" id="hide-profile">
+                Hide Profile from Public/Comunity
+            </label>
+        </div> -->
+
+        <!-- Zip Code -->
+
+        <!-- <div class="form-group">
+            <label for="zip-code">Zip Code</label>
+            <input type="text" class="form-control" id="zip-code">
+        </div> -->
+
+        <!-- Submit button -->
+
+        <button class="btn btn-transparent">Save My Changes</button>
+
+    </form>
+</div>
+
+
+<!-- Change Password -->
+<div class="widget change-password">
+    <h3 class="widget-header user">Edit Password</h3>
+    <form (ngSubmit)="!passwordForm.form.invalid && updatePassword(form.currentPassword,form.newPassword)" #passwordForm="ngForm">
+
+        <!-- Current Password -->
+
+        <div class="form-group" [class.has-error]="(passwordForm.submitted || currentPassword.touched) && currentPassword.invalid">
+            <label for="current-password">Current Password</label>
+            <input type="password" class="form-control" name="currentPassword" #currentPassword="ngModel" [(ngModel)]="form.currentPassword" required minlength="6">
+        </div>
+
+        <div *ngIf="(passwordForm.submitted || currentPassword.touched) && currentPassword.invalid">
+            <div *ngIf="currentPassword.errors?.required">Current Password is required</div>
+            <div *ngIf="currentPassword.errors?.minlength">Current Password must be at least 6 characters</div>
+        </div>
+
+
+
+        <div ngModelGroup="passwordGroup" [class.has-error]="confirmPassword.touched && confirmPassword.invalid && !confirmPassword.errors?.required">
+            <!-- New Password -->
+
+            <div class="form-group" [class.has-error]="(passwordForm.submitted || newPassword.touched) && newPassword.invalid">
+                <label for="new-password">New Password</label>
+                <input type="password" class="form-control" (input)="confirmPassword.control.updateValueAndValidity()" name="newPassword" #newPassword="ngModel" [(ngModel)]="form.newPassword" required minlength="6">
+            </div>
+
+            <div *ngIf="(passwordForm.submitted || newPassword.touched) && newPassword.invalid">
+                <div *ngIf="newPassword.errors?.required">New Password is required</div>
+                <div *ngIf="newPassword.errors?.minlength">New Password must be at least 6 characters</div>
+            </div>
+
+            <!-- Confirm New Password -->
+
+            <div class="form-group" [class.has-error]="(passwordForm.submitted || confirmPassword.touched) && confirmPassword.invalid">
+                <label for="confirm-password">Confirm New Password</label>
+                <input type="password" class="form-control" name="confirmPassword" appConfirmEqualValidator="newPassword" #confirmPassword="ngModel" [(ngModel)]="form.confirmPassword" required minlength="6">
+            </div>
+
+            <div *ngIf="(passwordForm.submitted || confirmPassword.touched) && confirmPassword.invalid">
+                <div *ngIf="confirmPassword.errors?.required">Confirm Password is required</div>
+                <div *ngIf="confirmPassword.errors?.minlength">Confirm Password must be at least 6 characters</div>
+
+            </div>
+            <div class="help-block" *ngIf="confirmPassword.touched && confirmPassword.errors?.notEqual && !confirmPassword.errors?.required">
+                Password and Confirm Password does not match
+            </div>
+
+        </div>
+
+        <!-- Submit Button -->
+
+        <button class="btn btn-transparent">Change Password</button>
+        <div *ngIf="passwordForm.submitted && !currentPasswordCorrect" class="alert alert-danger">
+            Current password is wrong!
+        </div>
+    </form>
+</div>
+
+<!-- Change Email Address -->
+<!-- <div class="widget change-email mb-0">
+    <h3 class="widget-header user">Edit Email Address</h3>
+    <form (ngSubmit)="!emailForm.form.invalid && updateEmail(form.currentEmail,form.newEmail)" #emailForm="ngForm"> -->
+
+<!-- Current Password -->
+
+<!-- <div class="form-group" [class.has-error]="(emailForm.submitted || currentEmail.touched) && currentEmail.invalid">
+            <label for="current-email">Current Email</label>
+            <input type="email" class="form-control" name="currentEmail" #currentEmail="ngModel" [(ngModel)]="form.currentEmail" required email>
+        </div>
+
+        <div *ngIf="(emailForm.submitted || currentEmail.touched) && currentEmail.invalid">
+            <div *ngIf="currentEmail.errors?.required">Current Email is required</div>
+            <div *ngIf="currentEmail.errors?.email">Current Email must be a valid email address</div>
+        </div> -->
+
+<!-- New email -->
+
+<!-- <div class="form-group" [class.has-error]="(emailForm.submitted || newEmail.touched) && newEmail.invalid">
+            <label for="new-email">New email</label>
+            <input type="email" class="form-control" name="newEmail" #newEmail="ngModel" [(ngModel)]="form.newEmail" required email>
+        </div>
+        <div *ngIf="(emailForm.submitted || newEmail.touched) && newEmail.invalid">
+            <div *ngIf="newEmail.errors?.required">New Email is required</div>
+            <div *ngIf="newEmail.errors?.email">New Email must be a valid email address</div>
+        </div> -->
+
+<!-- Submit Button -->
+
+<!-- <button class="btn btn-transparent">Change email</button> -->
+<!-- <div *ngIf="emailForm.submitted && !currentEmailCorrect" class="alert alert-danger">
+            Current email is wrong!
+        </div> -->
+<!-- </form> -->
+<!-- </div> -->

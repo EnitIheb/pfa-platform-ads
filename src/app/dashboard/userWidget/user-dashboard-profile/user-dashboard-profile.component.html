@@ -1,0 +1,13 @@
+<div class="widget user-dashboard-profile">
+    <!-- User Image -->
+    <div class="profile-thumb">
+        <img src="assets/images/user/user-thumb.jpg" alt="" class="rounded-circle">
+    </div>
+    <!-- User Name -->
+    <h5 class="text-center">{{userFullName}}</h5>
+    <h5 class="text-center">{{userEmail}}</h5>
+    <p>Joined February 06, 2017</p>
+    <a *ngIf="!this.switchProfileService.isSetToEditProfileInfo()" (click)="goToEditProfileInfo()" routerLink="" class="btn btn-main-sm">
+        <h4>Edit Profile</h4>
+    </a>
+</div>

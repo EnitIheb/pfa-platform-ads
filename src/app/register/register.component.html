@@ -1,0 +1,80 @@
+<div *ngIf="isSignedUp; else signupForm">
+    <h2>Your registration is successful. Please login!</h2>
+</div>
+
+<ng-template #signupForm>
+    <section class="section">
+        <div class="container">
+            <div class="row col-sm-6" style="max-width:350px;">
+                <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">
+
+                    <!-- <div class="form-group" [class.has-error]="accountType.touched && accountType.invalid">
+                        <label for="accountType" class="control-label">What type of account would you like to have ?</label>
+                        <select (change)="selectChangeHandler($event)" required id="accountType" name="accountType" class="selectpicker show-menu-arrow form-control" [(ngModel)]="form.accountType" #accountType="ngModel">
+                            <option value="0" selected disabled></option>
+                            <option value="1">Consumer: I would like to receive ads</option>
+                            <option value="2">Business: I would like to publish ads</option>
+                        </select>
+                        <div *ngIf="accountType.touched && accountType.invalid">
+                            Account Type is required
+                        </div>
+                    </div> -->
+
+                    <div class="form-group" [class.has-error]="f.submitted && selectedBy.errors?.required">
+                        <label for="selectedBy">What type of account would you like to have ?</label>
+                        <br>
+                        <label class="radio-inline">
+                        <input type="radio" name="selectedBy" (change)="selectChangeHandler($event)"
+                        [(ngModel)]="form.selectedBy" value="1" required
+                                        #selectedBy="ngModel">Consumer: I would like to receive ads
+                        </label><br>
+                        <label class="radio-inline">
+                        <input type="radio" name="selectedBy"  (change)="selectChangeHandler($event)"
+                        [(ngModel)]="form.selectedBy" value="2" required>Business: I would like to publish ads
+                        </label>
+                        <div *ngIf="f.submitted && selectedBy.errors?.required">selectedBy is required</div>
+                    </div>
+
+                    <div class="form-group" [class.has-error]="(f.submitted || name.touched) && name.invalid">
+                        <label for="name">Your name</label>
+                        <input type="text" class="form-control" name="name" [(ngModel)]="form.name" #name="ngModel" required minlength="3" />
+                        <div *ngIf="(f.submitted || name.touched) && name.invalid">
+                            <div *ngIf="name.errors.required">Name is required</div>
+                            <div *ngIf="name.errors.minlength">Name must be at least 3 characters</div>
+                        </div>
+                    </div>
+                    <div class="form-group" [class.has-error]="(f.submitted || username.touched) && username.invalid">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" name="username" [(ngModel)]="form.username" #username="ngModel" required minlength="3" />
+                        <div *ngIf="(f.submitted || username.touched) && username.invalid">
+                            <div *ngIf="username.errors.required">Username is required</div>
+                            <div *ngIf="username.errors.minlength">Username must be at least 3 characters</div>
+                        </div>
+                    </div>
+                    <div class="form-group" [class.has-error]="(f.submitted || email.touched) && email.invalid">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" name="email" [(ngModel)]="form.email" #email="ngModel" required email />
+                        <div *ngIf="(f.submitted || email.touched) && email.invalid">
+                            <div *ngIf="email.errors.required">Email is required</div>
+                            <div *ngIf="email.errors.email">Email must be a valid email address</div>
+                        </div>
+                    </div>
+                    <div class="form-group" [class.has-error]="(f.submitted || password.touched) && password.invalid">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" name="password" [(ngModel)]="form.password" #password="ngModel" required minlength="6" />
+                        <div *ngIf="(f.submitted || password.touched) && password.invalid">
+                            <div *ngIf="password.errors.required">Password is required</div>
+                            <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary">Register</button>
+                        <div *ngIf="f.submitted && isSignUpFailed" class="alert alert-warning">
+                            Signup failed!<br/>{{errorMessage}}
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</ng-template>

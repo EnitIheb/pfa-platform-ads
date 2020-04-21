@@ -1,0 +1,83 @@
+<div>
+    <h1 *ngIf="this.id=='-1'" class="text-center">Create Ad</h1>
+    <h1 *ngIf="this.id.substr(0, 9) == this.viewPrefix" class="text-center">View Ad</h1>
+    <h1 *ngIf="this.id!='-1' && this.id.substr(0, 9) != this.viewPrefix" class="text-center">Edit Ad</h1>
+</div> <br><br><br><br>
+<div class="container">
+
+    <form (ngSubmit)="!adForm.invalid && saveAd()" #adForm="ngForm">
+
+        <fieldset *ngIf="this.id=='-1'" class="form-group" [class.has-error]="(adForm.submitted || id.touched) && id.invalid">
+            <label for="">Id</label>
+            <input type="text" #id="ngModel" [(ngModel)]="ad.id" class="form-control" name="id" required="required">
+        </fieldset>
+
+        <div *ngIf="(adForm.submitted || id.touched) && id.errors?.required">Id is required</div>
+
+
+        <fieldset class="form-group" [class.has-error]="(adForm.submitted || advertiserEmail.touched) && advertiserEmail.invalid">
+            <label for="email">advertiserEmail</label>
+            <input type="text" #advertiserEmail="ngModel" [(ngModel)]="ad.advertiserEmail" class="form-control" name="advertiserEmail" required="required" email>
+        </fieldset>
+
+        <div *ngIf="(adForm.submitted || advertiserEmail.touched) && advertiserEmail.invalid">
+            <div *ngIf="advertiserEmail.errors?.required">Advertiser Email is required</div>
+            <div *ngIf="advertiserEmail.errors?.email">Advertiser Email must be a valid email address</div>
+        </div>
+
+
+        <fieldset class="form-group" [class.has-error]="(adForm.submitted || view.touched) && view.invalid">
+            <label for="">view</label>
+            <input type="text" #view="ngModel" [(ngModel)]="ad.view" class="form-control" name="view" required>
+        </fieldset>
+
+        <div *ngIf="(adForm.submitted || view.touched) && view.errors?.required">View is required</div>
+
+
+        <fieldset class="form-group" [class.has-error]="(adForm.submitted || rate.touched) && rate.invalid">
+            <label for="">rate</label>
+            <input type="text" #rate="ngModel" [(ngModel)]="ad.rate" class="form-control" name="rate" required="required">
+        </fieldset>
+
+        <div *ngIf="(adForm.submitted || rate.touched) && rate.errors?.required">Rate is required</div>
+
+
+        <fieldset class="form-group" [class.has-error]="(adForm.submitted || fileAdress.touched) && fileAdress.invalid">
+            <label for="">fileAdress</label>
+            <input type="text" #fileAdress="ngModel" [(ngModel)]="ad.fileAdress" class="form-control" name="fileAdress" required="required">
+        </fieldset>
+
+        <div *ngIf="(adForm.submitted || fileAdress.touched) && fileAdress.errors?.required">File Adress is required</div>
+
+
+        <fieldset class="form-group" [class.has-error]="(adForm.submitted || textField.touched) && textField.invalid">
+            <label for="">textField</label>
+            <input type="text" #textField="ngModel" [(ngModel)]="ad.textField" class="form-control" name="textField" required="required" minlength="5">
+        </fieldset>
+
+        <div *ngIf="(adForm.submitted || textField.touched) && textField.invalid">
+            <div *ngIf="textField.errors?.required">Text Field is required</div>
+            <div *ngIf="textField.errors?.minlength">Text Field must be at least 5 characters</div>
+        </div>
+
+
+        <fieldset class="form-group" [class.has-error]="(adForm.submitted || phoneNumber.touched) && phoneNumber.invalid">
+            <label for="">phoneNumber</label>
+            <input type="text" #phoneNumber="ngModel" [(ngModel)]="ad.phoneNumber" class="form-control" name="phoneNumber" required="required" minlength="8">
+        </fieldset>
+
+        <div *ngIf="(adForm.submitted || phoneNumber.touched) && phoneNumber.invalid">
+            <div *ngIf="phoneNumber.errors?.required">Phone Number is required</div>
+            <div *ngIf="phoneNumber.errors?.minlength">Phone Number must be at least 8 characters</div>
+        </div>
+
+
+        <br><br>
+
+        <button *ngIf="this.id.substr(0, 9) != this.viewPrefix" type="submit" class="btn btn-success">Save</button>
+        <!-- OR -->
+        <button *ngIf="this.id.substr(0, 9) == this.viewPrefix" (click)="goBack()" class="btn btn-success">Go Back</button>
+
+    </form>
+
+</div>

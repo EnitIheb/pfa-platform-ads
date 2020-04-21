@@ -1,0 +1,70 @@
+<!--==================================
+=            User Profile            =
+===================================-->
+<section class="dashboard section">
+    <!-- Container Start -->
+    <div class="container">
+        <!-- Row Start -->
+        <div class="row">
+            <div class="col-md-10 offset-md-1 col-lg-4 offset-lg-0">
+                <div class="sidebar">
+                    <!-- User Widget -->
+
+                    <app-user-dashboard-profile></app-user-dashboard-profile>
+
+                    <!-- Dashboard Links -->
+
+                    <app-user-dashboard-menu></app-user-dashboard-menu>
+
+
+                </div>
+            </div>
+            <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-0">
+
+
+                <!-- Recently Favorited Ads -->
+                <div *ngIf="this.switchProfileService.isSetToAdsList()">
+                    <app-user-ads></app-user-ads>
+                </div>
+
+
+
+                <!-- Edit Personal Info -->
+                <div *ngIf="this.switchProfileService.isSetToEditProfileInfo()">
+                    <app-edit-user-profile></app-edit-user-profile>
+                </div>
+
+
+            </div>
+        </div>
+        <!-- Row End -->
+    </div>
+    <!-- Container End -->
+</section>
+
+
+<!-- //show this only when signed in -->
+<div *ngIf="info.token; else loggedOut">
+    <h5 class="text-primary">Your Information</h5>
+    <p>
+        <strong>Name:</strong> {{info.name}}<br />
+        <strong>Username:</strong> {{info.username}}<br/>
+        <strong>Roles:</strong> {{info.authorities}}<br />
+        <strong>Token:</strong> {{info.token}}.
+    </p>
+    <button class="btn btn-secondary" (click)="logout()">Logout</button>
+</div>
+
+<ng-template #loggedOut>
+    <h3>Please login.</h3>
+
+</ng-template>
+
+
+
+
+
+<div *ngIf="info.token">
+    <h4>Content from Server</h4>
+    {{board}} {{errorMessage}}
+</div>
